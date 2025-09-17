@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WP6 - Broadband for Nepal Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #F8F3F0;
+            color: #1D1D1B;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #EC1550 0%, #5E0023 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .projects-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #EC1550;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .section-description {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(236, 21, 80, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #EC1550;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(236, 21, 80, 0.2);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .call-badge {
+            background: #EC1550;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        .project-code {
+            background: #F69AB0;
+            color: #5E0023;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1D1D1B;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(45deg, #EC1550, #F69AB0);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .project-link:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(236, 21, 80, 0.3);
+        }
+
+        .project-link::after {
+            content: '→';
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-link:hover::after {
+            transform: translateX(3px);
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #5E0023 0%, #EC1550 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        footer {
+            background: #1D1D1B;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-card {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>WP6</h1>
+                <p class="subtitle">Broadband for Nepal - Digital Infrastructure Projects</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Our Projects</h2>
+            <p class="section-description">
+                Bridging the digital divide through innovative broadband solutions and community-focused technology initiatives across South Asia.
+            </p>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="call-badge">1st Call</span>
+                        <span class="project-code">WP6</span>
+                    </div>
+                    <h3 class="project-title">WP6 Broadband for Nepal</h3>
+                    <p class="project-description">Effective Broadband Solution for Bridging the Digital Divide</p>
+                    <a href="https://c1wp6prj12.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="call-badge">2nd Call</span>
+                        <span class="project-code">WP6</span>
+                    </div>
+                    <h3 class="project-title">Cable Operators Neutral Network Exchange</h3>
+                    <p class="project-description">Cable Operators Neutral Network Exchange for Community Transformation (CONNECT)</p>
+                    <a href="https://c2wp6prj29.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="call-badge">3rd Call</span>
+                        <span class="project-code">#35_PK</span>
+                    </div>
+                    <h3 class="project-title">Connecting the Unconnected</h3>
+                    <p class="project-description">Internet for Underserved Rural Schools in Balochistan</p>
+                    <a href="https://c3wp6prj49.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="call-badge">3rd Call</span>
+                        <span class="project-code">#2_MM</span>
+                    </div>
+                    <h3 class="project-title">Bridging the Digital Divide in Myanmar</h3>
+                    <p class="project-description">Helping to Bridge the Digital Divide across Myanmar communities</p>
+                    <a href="https://c3wp6prj50.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="call-badge">3rd Call</span>
+                        <span class="project-code">#27_NP</span>
+                    </div>
+                    <h3 class="project-title">Expansion of TEIN</h3>
+                    <p class="project-description">Feasibility study of TEIN connection in all seven provinces of Nepal</p>
+                    <a href="https://c3wp6prj51.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="call-badge">4th Call</span>
+                        <span class="project-code">#19</span>
+                    </div>
+                    <h3 class="project-title">Implementation of e-Learning</h3>
+                    <p class="project-description">e-Learning and associated Capacity Building for identified schools in Bhutan</p>
+                    <a href="https://c4wp6prj66.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="call-badge">4th Call</span>
+                        <span class="project-code">#93</span>
+                    </div>
+                    <h3 class="project-title">ICT Research and Development</h3>
+                    <p class="project-description">ICT Research and Development for Rural/Remote Areas of Pakistan</p>
+                    <a href="https://c4wp6prj67.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="call-badge">5th Call</span>
+                        <span class="project-code">C561</span>
+                    </div>
+                    <h3 class="project-title">Connecting Bhutan and Laos</h3>
+                    <p class="project-description">Connecting Bhutan and Laos through digital bridges to enhance human capital</p>
+                    <a href="https://c5wp6prj86.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <span class="call-badge">5th Call</span>
+                        <span class="project-code">C562</span>
+                    </div>
+                    <h3 class="project-title">Building the Digital Edge</h3>
+                    <p class="project-description">Building the Digital Edge across communities and regions</p>
+                    <a href="https://c5wp6prj87.asiaconnect.online" class="project-link" target="_blank">View Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <h2>Project Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">9</span>
+                    <span class="stat-label">Active Projects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Countries</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Project Calls</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Digital Focus</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 WP6 Broadband for Nepal. Bridging the Digital Divide.</p>
+        </div>
+    </footer>
+</body>
+</html>
